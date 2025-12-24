@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" class="has-navbar-fixed-top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <script id="theme-script">
+      let userTheme = window.localStorage.getItem("active-theme");
+      if (userTheme != null) {
+        document.documentElement.className = userTheme;
+      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.className = "theme-dark";
+      } else {
+        document.documentElement.className = "theme-light";
+      }
+    </script>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="carousel">
+      <div class="carousel-cards" style="transform: translateX(0px)"></div>
+    </div>
+    <nav class="navbar is-fixed-bottom">
+      <div class="navbar-menu is-active">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <button>
+              <span
+                id="theme-icon"
+                class="material-icons"
+                onClick="switchTheme()">
+                hourglass_bottom
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="cards.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
