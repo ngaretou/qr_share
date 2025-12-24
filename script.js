@@ -152,8 +152,6 @@ function renderCards() {
       <div class="card-content">
         <p style="font-size: 16pt;"><a href="${card.link}">${card.title}</a></p>
         <p style="font-size: 12pt;"><a href="${card.link}">${card.link}</a></p>
-        <!-- No need to edit this file -->
-        <!-- ${card.description ? `<p>${card.description}</p>` : ""} -->
       </div>
       <footer class="card-footer">
         <button class="card-footer-item navbutton prev" onClick="prevSlide()">
