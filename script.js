@@ -29,6 +29,7 @@ function prevSlide() {
 
 function handleTouchStart(event) {
   startX = event.touches[0].clientX;
+  endX = startX;
   isLink = event.target.tagName.toLowerCase() === "a";
 }
 
@@ -48,6 +49,7 @@ function handleTouchEnd() {
 
 function handleMouseDown(event) {
   startX = event.clientX;
+  endX = startX;
   isLink = event.target.tagName.toLowerCase() === "a";
 }
 
@@ -120,11 +122,27 @@ function switchTheme() {
   }
 }
 
+function shareCard(index) {
+  const card = cards[index];
+  if (navigator.share) {
+    navigator
+      .share({
+        title: card.title,
+        text: card.description || card.title,
+        url: card.link,
+      })
+      .catch((error) => console.log("Error sharing", error));
+  } else {
+    alert("Sharing is not supported on this browser.");
+  }
+}
+
 function renderCards() {
   const container = document.querySelector(".carousel-cards");
+
   container.innerHTML = cards
     .map(
-      (card) => `
+      (card, index) => `
     <div class="card card-spacing">
       <div class="card-image">
         <figure class="image is-square qr-code">
@@ -132,7 +150,10 @@ function renderCards() {
         </figure>
       </div>
       <div class="card-content">
-        <p><a href="${card.link}">${card.title}</a></p>
+        <p style="font-size: 16pt;"><a href="${card.link}">${card.title}</a></p>
+        <p style="font-size: 12pt;"><a href="${card.link}">${card.link}</a></p>
+        <!-- No need to edit this file -->
+        <!-- ${card.description ? `<p>${card.description}</p>` : ""} -->
       </div>
       <footer class="card-footer">
         <button class="card-footer-item navbutton prev" onClick="prevSlide()">
@@ -141,6 +162,9 @@ function renderCards() {
         <a class="card-footer-item" href="${card.link}">
           <span class="material-icons">touch_app</span>
         </a>
+        <button class="card-footer-item navbutton" onClick="shareCard(${index})">
+          <span class="material-icons">share</span>
+        </button>
         <button class="card-footer-item navbutton next" onClick="nextSlide()">
           <span class="material-icons">navigate_next</span>
         </button>
