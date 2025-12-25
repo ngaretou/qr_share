@@ -57,3 +57,125 @@ p {
 .light-icon {
   color: #f2a413;
 }
+/* App Drawer Menu Styles */
+.app-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay */
+  z-index: 1000;
+  display: flex;
+  flex-direction: row; /* Horizontal layout */
+  justify-content: flex-end; /* Align to right */
+  opacity: 0;
+  pointer-events: none; /* Let clicks pass through when hidden */
+  transition: opacity 0.3s ease;
+}
+
+.app-drawer.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-content {
+  /* put content at bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: #fff;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px; /* Change border radius for side drawer */
+  border-top-right-radius: 0;
+  padding: 20px;
+  width: min(75vw, 300px);
+  height: 100%; /* Full height */
+  max-height: none;
+  overflow-y: auto;
+  transform: translateX(100%); /* Slide from right */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-drawer.is-active .drawer-content {
+  transform: translateX(0);
+}
+
+/* Theme support for drawer */
+.theme-dark .drawer-content {
+  background-color: #333;
+  color: #fff;
+}
+
+#drawer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+#drawer-list li {
+  margin-bottom: 10px;
+}
+
+#drawer-list li button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: inherit;
+  font-family: inherit;
+}
+
+#drawer-list li button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.theme-dark #drawer-list li button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  /* pointer-events: none; Allow clicks to pass through valid content underneath */
+  z-index: 1;
+}
+/* 
+.nav-btn {
+  pointer-events: auto; 
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    background-color 0.2s;
+} */
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-dark .nav-btn {
+  background: #333;
+  color: white;
+}

@@ -173,6 +173,45 @@ function renderCards() {
     .join("");
 }
 
+// App Drawer Menu Logic
+
+function showMenu() {
+  const drawer = document.getElementById("app-drawer");
+  drawer.style.display = "flex";
+  // Force reflow to enable transition
+  void drawer.offsetWidth;
+  drawer.classList.add("is-active");
+}
+
+function hideMenu(event) {
+  if (event && event.target.id !== "app-drawer") return;
+  const drawer = document.getElementById("app-drawer");
+  drawer.classList.remove("is-active");
+  setTimeout(() => {
+    drawer.style.display = "none";
+  }, 300); // 300ms matches CSS transition duration
+}
+
+function initMenu() {
+  const list = document.getElementById("drawer-list");
+  if (!list) return;
+
+  list.innerHTML = cards
+    .map(
+      (card, index) => `
+    <li>
+      <button onclick="showSlide(${index}); hideMenu();">
+        ${card.title}
+      </button>
+    </li>
+  `
+    )
+    .join("");
+}
+
+// Initialize Menu
+initMenu();
+
 // Initialize the carousel
 if (typeof pageTitle !== "undefined") {
   document.title = pageTitle;

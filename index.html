@@ -16,29 +16,83 @@
       }
     </script>
     <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="carousel">
       <div class="carousel-cards" style="transform: translateX(0px)"></div>
     </div>
-    <nav class="navbar is-fixed-bottom">
-      <div class="navbar-menu is-active">
-        <div class="navbar-start">
-          <div class="navbar-item">
-            <button>
-              <span
-                id="theme-icon"
-                class="material-icons"
-                onClick="switchTheme()">
-                hourglass_bottom
-              </span>
-            </button>
-          </div>
-        </div>
+
+    <div class="bottom-nav">
+      <button>
+        <span id="theme-icon" class="material-icons" onclick="switchTheme()">
+          hourglass_bottom
+        </span>
+      </button>
+      <button>
+        <span class="material-icons" onclick="showMenu()">menu</span>
+      </button>
+    </div>
+
+    <!-- App Drawer Menu -->
+
+    <style>
+      #app-drawer {
+        display: none;
+      }
+    </style>
+    <div id="app-drawer" class="app-drawer" onclick="hideMenu(event)">
+      <div class="drawer-content">
+        <ul id="drawer-list">
+          <!-- Items will be injected here -->
+        </ul>
       </div>
-    </nav>
-    <script src="cards.js"></script>
-    <script src="script.js"></script>
+    </div>
+
+    <script>
+      (function () {
+        var version = Date.now();
+
+        function getVersion(url) {
+          return fetch(url, { method: "HEAD" })
+            .then(function (res) {
+              return (
+                res.headers.get("Last-Modified") ||
+                res.headers.get("ETag") ||
+                version
+              );
+            })
+            .catch(function () {
+              return version;
+            });
+        }
+
+        function injectCss(url, v) {
+          var link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = url + "?v=" + encodeURIComponent(v);
+          document.head.appendChild(link);
+        }
+
+        function injectJs(url, v) {
+          var script = document.createElement("script");
+          script.src = url + "?v=" + encodeURIComponent(v);
+          script.async = false;
+          document.body.appendChild(script);
+        }
+
+        // Load CSS
+        getVersion("styles.css").then(function (v) {
+          injectCss("styles.css", v);
+        });
+
+        // Load JS
+        Promise.all([getVersion("cards.js"), getVersion("script.js")]).then(
+          function (versions) {
+            injectJs("cards.js", versions[0]);
+            injectJs("script.js", versions[1]);
+          }
+        );
+      })();
+    </script>
   </body>
 </html>
