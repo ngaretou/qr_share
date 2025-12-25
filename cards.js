@@ -1,9 +1,11 @@
-/// Card Data
-// Add new cards here!
-// i.e. if you only need two cards, just delete the others.
+/// QR code Data
 
+// Put your title here:
 const pageTitle = "qr.sng.al";
 
+// Add new cards here, or if you need fewer cards than we have here, just delete the others.
+// if your link is over 25 characters, no problem, it will be truncated in the display so it will look nice
+// but will still go to the right address.
 const cards = [
   {
     title: "Kàddug Yàlla",

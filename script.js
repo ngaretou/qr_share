@@ -141,8 +141,11 @@ function renderCards() {
   const container = document.querySelector(".carousel-cards");
 
   container.innerHTML = cards
-    .map(
-      (card, index) => `
+    .map((card, index) => {
+      const displayLink =
+        card.link.length > 25 ? card.link.slice(0, 25) + "..." : card.link;
+
+      return `
     <div class="card card-spacing">
       <div class="card-image">
         <figure class="image is-square qr-code">
@@ -151,7 +154,7 @@ function renderCards() {
       </div>
       <div class="card-content">
         <p style="font-size: 16pt;"><a href="${card.link}">${card.title}</a></p>
-        <p style="font-size: 12pt;"><a href="${card.link}">${card.link}</a></p>
+        <p style="font-size: 12pt;"><a href="${card.link}">${displayLink}</a></p>
       </div>
       <footer class="card-footer">
         <button class="card-footer-item navbutton prev" onClick="prevSlide()">
@@ -168,8 +171,8 @@ function renderCards() {
         </button>
       </footer>
     </div>
-  `
-    )
+  `;
+    })
     .join("");
 }
 
