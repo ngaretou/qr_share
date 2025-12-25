@@ -13,6 +13,8 @@ Example at [qr.sng.al](https://qr.sng.al):
 ### To make it yours: 
 
 * Download this repository. 
+  * You can clone it or 
+  * [You can download it as a .zip file](https://github.com/coresng/qr-code-viewer/archive/refs/heads/main.zip)
 
 * Create your QR codes with your preferred method or via [QR Code Monkey](https://www.qrcode-monkey.com/)
 
