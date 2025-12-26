@@ -236,3 +236,8 @@ carousel.addEventListener("mouseup", handleMouseUp);
 // Prevent image drag
 const images = document.querySelectorAll(".carousel-cards img");
 images.forEach((img) => img.addEventListener("dragstart", preventImageDrag));
+
+// Prevent flash of unstyled content
+document.fonts.ready.then(() => {
+  document.documentElement.style.opacity = "1";
+});
