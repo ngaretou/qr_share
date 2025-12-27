@@ -18,11 +18,25 @@ h1 {
 p {
   text-align: center;
 }
+
+hr {
+  margin: 15px 0px 15px 15px;
+}
+
 .theme-light a {
   color: black;
 }
+.theme-light hr {
+  /* background-color: black; */
+  border-top: 1px solid black;
+}
+
 .theme-dark a {
   color: white;
+}
+.theme-dark hr {
+  /* background-color: white; */
+  border-top: 1px solid white;
 }
 .carousel {
   position: relative;
@@ -74,6 +88,44 @@ p {
   transition: opacity 0.3s ease;
 }
 
+.app-drawer-icon {
+  text-align: right;
+  padding: 0;
+  margin: 0;
+}
+
+.drawer-main {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.drawer-footer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.drawer-footer button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-footer button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.theme-dark .drawer-footer button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .app-drawer.is-active {
   opacity: 1;
   pointer-events: auto;
@@ -83,7 +135,8 @@ p {
   /* put content at bottom */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; REMOVED to allow margin:auto to work */
+  position: relative; /* Context for absolute footer */
 
   background-color: #fff;
   border-top-left-radius: 15px;
@@ -153,29 +206,15 @@ p {
   /* pointer-events: none; Allow clicks to pass through valid content underneath */
   z-index: 1;
 }
-/* 
-.nav-btn {
-  pointer-events: auto; 
-  background: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition:
-    transform 0.1s,
-    background-color 0.2s;
-} */
 
-.nav-btn:active {
-  transform: scale(0.95);
+.modal-width {
+  width: min(75vw, 320px);
 }
 
-.theme-dark .nav-btn {
-  background: #333;
-  color: white;
+.modal-card-body {
+  border-radius: 15px;
+}
+
+.modal-card-body p {
+  text-align: left;
 }

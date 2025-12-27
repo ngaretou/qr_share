@@ -178,6 +178,21 @@ function renderCards() {
 
 // App Drawer Menu Logic
 
+function showAbout() {
+  console.log("showing about");
+  hideMenu();
+
+  const modal = document.getElementById("about-modal");
+  modal.classList.add("is-active");
+  const modalTitle = document.getElementById("modal-title");
+  modalTitle.innerText = pageTitle;
+}
+
+function hideAbout() {
+  const modal = document.getElementById("about-modal");
+  modal.classList.remove("is-active");
+}
+
 function showMenu() {
   const drawer = document.getElementById("app-drawer");
   drawer.style.display = "flex";
@@ -199,7 +214,15 @@ function initMenu() {
   const list = document.getElementById("drawer-list");
   if (!list) return;
 
-  list.innerHTML = cards
+  list.innerHTML = `
+  
+  <li class="app-drawer-icon">
+  <span class="material-icons">qr_code</span>
+  </li>
+  <hr>
+  `;
+
+  list.innerHTML += cards
     .map(
       (card, index) => `
     <li>
@@ -222,6 +245,15 @@ if (typeof pageTitle !== "undefined") {
 renderCards();
 showSlide(currentIndex);
 
+// Add about button
+if (includeAboutButton) {
+  const aboutButton = document.createElement("button");
+  aboutButton.onclick = showAbout;
+  aboutButton.innerHTML = `<span class="material-icons">help</span>`;
+  const drawerFooter = document.querySelector(".drawer-footer");
+  drawerFooter.appendChild(aboutButton);
+}
+
 // Add touch event listeners
 const carousel = document.querySelector(".carousel-cards");
 carousel.addEventListener("touchstart", handleTouchStart);
@@ -236,6 +268,21 @@ carousel.addEventListener("mouseup", handleMouseUp);
 // Prevent image drag
 const images = document.querySelectorAll(".carousel-cards img");
 images.forEach((img) => img.addEventListener("dragstart", preventImageDrag));
+
+const modalBackground = document.querySelector(".modal-background");
+modalBackground.addEventListener("click", (event) => {
+  console.log("clicking modal background");
+  hideAbout();
+});
+
+// Add a keyboard event to close all modals
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    console.log("Escape key pressed");
+    hideMenu();
+    hideAbout();
+  }
+});
 
 // Prevent flash of unstyled content
 document.fonts.ready.then(() => {
