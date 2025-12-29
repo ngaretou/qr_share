@@ -24,7 +24,7 @@ hr {
 }
 
 .theme-light a {
-  color: black;
+  color: #404654;
 }
 .theme-light hr {
   /* background-color: black; */
@@ -32,7 +32,7 @@ hr {
 }
 
 .theme-dark a {
-  color: white;
+  color: #abb1bf;
 }
 .theme-dark hr {
   /* background-color: white; */
@@ -217,4 +217,25 @@ hr {
 
 .modal-card-body p {
   text-align: left;
+}
+
+.modal-card-body a {
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.version {
+  font-size: 0.8rem;
+}
+
+.theme-dark .version a {
+  color: #abb1bf;
+}
+
+.theme-light .version a {
+  color: #404654;
+}
+
+.material-icons {
+  vertical-align: middle;
 }

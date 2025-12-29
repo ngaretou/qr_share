@@ -20,7 +20,6 @@ function showSlide(index) {
 
 function nextSlide() {
   showSlide(currentIndex + 1);
-  // console.log("sliding");
 }
 
 function prevSlide() {
@@ -102,7 +101,6 @@ if (themeIcon) {
 }
 
 function switchTheme() {
-  // console.log("switching theme");
   isDark = !isDark;
   const themeClass = isDark ? "theme-dark" : "theme-light";
   document.documentElement.className = themeClass;
@@ -161,7 +159,7 @@ function renderCards() {
           <span class="material-icons">navigate_before</span>
         </button>
         <a class="card-footer-item" href="${card.link}">
-          <span class="material-icons">touch_app</span>
+          <span class="material-icons">launch</span>
         </a>
         <button class="card-footer-item navbutton" onClick="shareCard(${index})">
           <span class="material-icons">share</span>
@@ -179,13 +177,39 @@ function renderCards() {
 // App Drawer Menu Logic
 
 function showAbout() {
-  console.log("showing about");
   hideMenu();
+
+  // is version defined and not 0.0.0?
+  const hasVersion = typeof version !== "undefined" && version !== "0.0.0";
+
+  // if so, add it to the version text
+  const versionText = hasVersion ? version + "&nbsp;&nbsp;|&nbsp;&nbsp;" : "";
+
+  const aboutContent = `<article class="media">
+            <figure class="media-left">
+              <span class="material-icons" style="font-size: 48px">
+                qr_code
+              </span>
+            </figure>
+            <div class="media-content">
+            <strong id="modal-title" class="title is-6">${pageTitle}</strong>
+              <div class="content">
+                <span class="version">${versionText}
+                  <a href="https://github.com/ngaretou/qr_share" target="_blank">Source</a> 
+                  <span class="material-icons" style="font-size: 16px">launch</span>
+                </span>
+              </div>
+            </div>
+            <div class="media-right">
+              <button class="delete" onclick="hideAbout()"></button>
+            </div>
+          </article>`;
+
+  const modalBody = document.getElementById("about-modal-card-body");
+  modalBody.innerHTML = aboutContent;
 
   const modal = document.getElementById("about-modal");
   modal.classList.add("is-active");
-  const modalTitle = document.getElementById("modal-title");
-  modalTitle.innerText = pageTitle;
 }
 
 function hideAbout() {
@@ -215,7 +239,6 @@ function initMenu() {
   if (!list) return;
 
   list.innerHTML = `
-  
   <li class="app-drawer-icon">
   <span class="material-icons">qr_code</span>
   </li>
@@ -271,14 +294,12 @@ images.forEach((img) => img.addEventListener("dragstart", preventImageDrag));
 
 const modalBackground = document.querySelector(".modal-background");
 modalBackground.addEventListener("click", (event) => {
-  console.log("clicking modal background");
   hideAbout();
 });
 
 // Add a keyboard event to close all modals
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    console.log("Escape key pressed");
     hideMenu();
     hideAbout();
   }
