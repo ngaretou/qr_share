@@ -151,14 +151,14 @@ function renderCards() {
         </figure>
       </div>
       <div class="card-content">
-        <p style="font-size: 16pt;"><a href="${card.link}">${card.title}</a></p>
-        <p style="font-size: 12pt;"><a href="${card.link}">${displayLink}</a></p>
+        <p style="font-size: 16pt;"><a href="${card.link}" target="_blank">${card.title}</a></p>
+        <p style="font-size: 12pt;"><a href="${card.link}" target="_blank">${displayLink}</a></p>
       </div>
       <footer class="card-footer">
         <button class="card-footer-item navbutton prev" onClick="prevSlide()">
           <span class="material-icons">navigate_before</span>
         </button>
-        <a class="card-footer-item" href="${card.link}">
+        <a class="card-footer-item" href="${card.link}" target="_blank">
           <span class="material-icons">launch</span>
         </a>
         <button class="card-footer-item navbutton" onClick="shareCard(${index})">
