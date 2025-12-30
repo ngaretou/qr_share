@@ -43,4 +43,9 @@ const cards = [
     image: "images/qr-code-yn.png",
     link: "https://sng.al/yn",
   },
+  {
+    title: "qr.sng.al",
+    image: "images/qr-sng-al.png",
+    link: "https://qr.sng.al",
+  },
 ];
